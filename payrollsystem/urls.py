@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from services import views
@@ -31,6 +31,9 @@ urlpatterns = [
     path("profile/<int:user_id>/", views.profile, name='profile'),
     path('export_payslip/<str:selected_month>/<int:selected_year>/', views.export_payslip, name='export_payslip'),
     path('delete_employee/<int:emp_code>/', views.delete_employee, name='delete_employee'),
+
+    # API
+    path('api/', include('api.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
